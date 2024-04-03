@@ -21,12 +21,12 @@ const Table = () => {
         const tmp: Array<JSX.Element> = borrowed.map((borrowInstance: IBorrowInstance, index: number) => {
             return (
                 <tr key={index}>
-                    <td>{borrowInstance.id}</td>
                     <td>{borrowInstance.name}</td>
                     <td>{borrowInstance.surname}</td>
                     <td>{borrowInstance.title}</td>
                     <td>{borrowInstance.borrowed_date}</td>
                     <td>{borrowInstance.return_date}</td>
+                    <td><button onClick={() => { handleDelete(borrowInstance.id) }}>Delete</button></td>
                 </tr>
             )
         });
@@ -34,7 +34,7 @@ const Table = () => {
     }, [borrowed]);
 
     const getBorrowedBooks = async () => {
-        const response: Response = await fetch("http://localhost/bookstore/get.php", {
+        const response: Response = await fetch("http://localhost/bookstore/read.php", {
             method: "GET", headers: {
                 "Content-Type": "application/json"
             }
@@ -44,17 +44,33 @@ const Table = () => {
         setBorrowed(data);
     }
 
+    const handleDelete = async (id: number) => {
+        const response: Response = await fetch("http://localhost/bookstore/delete.php", {
+            method: "POST",
+            body: JSON.stringify({ id }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+        if (data.result == "SUCCESS") {
+            getBorrowedBooks();
+        } else {
+            console.error("Deleting error");
+        }
+    }
+
     return (
         <>
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Customer name</th>
                         <th>Customer surname</th>
                         <th>Book title</th>
                         <th>Date borrowed</th>
                         <th>Date return</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

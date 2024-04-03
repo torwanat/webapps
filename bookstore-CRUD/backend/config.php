@@ -31,6 +31,16 @@ class Config
         return $result;
     }
 
+    function deleteBorrow(int $id)
+    {
+        $query = $this->connection->prepare(
+            "DELETE FROM `borrowed` WHERE id=?;"
+        );
+        $query->bind_param("i", $id);
+        $result = $query->execute();
+        return $result;
+    }
+
     // function updateGame(string $uid, Game $game)
     // {
     //     $data = json_encode($game);
