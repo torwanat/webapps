@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { IBorrowInstance } from "./Table";
 
+interface IEditRowProps extends IBorrowInstance {
+    handleCloseEdit: () => void
+}
 interface IBook {
     id: number,
     title: string
@@ -12,11 +15,21 @@ interface ICustomer {
     surname: string
 }
 
-const EditRow = ({ name, surname, title, id, borrowed_date, return_date }: IBorrowInstance) => {
+interface IBody {
+    customerId: number,
+    bookId: number,
+    id: number,
+    borrowedDate: string,
+    returnDate: string
+}
+
+const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleCloseEdit }: IEditRowProps) => {
     const [books, setBooks] = useState<Array<JSX.Element>>([]);
     const [customers, setCustomers] = useState<Array<JSX.Element>>([]);
     const [customerId, setCustomerId] = useState<number>(-1);
     const [bookId, setBookId] = useState<number>(-1);
+    const [borrowedDate, setBorrowedDate] = useState<string>("");
+    const [returnDate, setReturnDate] = useState<string>("");
 
     useEffect(() => {
         getOptions();
@@ -31,35 +44,61 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date }: IBorr
         const data = await response.json();
 
         const bookOptions: Array<JSX.Element> = data.books.map((e: IBook) => {
-            return <option value={e.id} key={e.id} selected={e.title == title}>{e.title}</option>;
+            return <option value={e.id} key={e.id}>{e.title}</option>;
         });
 
         const customerOptions: Array<JSX.Element> = data.customers.map((e: ICustomer) => {
-            return <option value={e.id} key={e.id} selected={e.name == name && e.surname == surname}>{e.name + " " + e.surname}</option>;
+            return <option value={e.id} key={e.id}>{e.name + " " + e.surname}</option>;
         });
 
         setBookId(data.books.find((e: IBook) => { return e.title == title }).id);
         setCustomerId(data.customers.find((e: ICustomer) => { return e.name == name && e.surname == surname }).id);
         setBooks(bookOptions);
         setCustomers(customerOptions);
+        setBorrowedDate(borrowed_date);
+        setReturnDate(return_date);
+    }
+
+    const handleSave = async () => {
+        const body: IBody = {
+            customerId,
+            bookId,
+            id,
+            borrowedDate,
+            returnDate
+        }
+        const response: Response = await fetch("http://localhost/bookstore/update.php", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+
+        if (data.result == "SUCCESS") {
+            handleCloseEdit();
+        } else {
+            console.error("Save error");
+        }
     }
 
     return (
         <tr>
             <td colSpan={2}>
-                <select onChange={(event) => { setCustomerId(+event.target.value) }}>
+                <select onChange={(event) => { setCustomerId(+event.target.value) }} value={customerId}>
                     {customers}
                 </select>
             </td>
             <td>
-                <select onChange={(event) => { setBookId(+event.target.value) }}>
+                <select onChange={(event) => { setBookId(+event.target.value) }} value={bookId}>
                     {books}
                 </select>
             </td>
-            <td><input type="date" defaultValue={borrowed_date} /></td>
-            <td><input type="date" defaultValue={return_date} /></td>
-            <td><button>Save</button></td>
-            <td><button>Cancel</button></td>
+            <td><input type="date" defaultValue={borrowed_date} onChange={(event) => { setBorrowedDate(event.target.value) }} /></td>
+            <td><input type="date" defaultValue={return_date} onChange={(event) => { setReturnDate(event.target.value) }} /></td>
+            <td><button onClick={handleSave}>Save</button></td>
+            <td><button onClick={handleCloseEdit}>Cancel</button></td>
         </tr>
     );
 }

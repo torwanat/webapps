@@ -73,6 +73,16 @@ class Config
         return $result;
     }
 
+    function updateBorrow(int $book_id, int $customer_id, int $id, string $borrowed_date, string $return_date)
+    {
+        $query = $this->connection->prepare(
+            "INSERT INTO `borrowed` (book_id, customer_id, id, borrowed_date, return_date) VALUES(?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE book_id=VALUES(book_id), customer_id=VALUES(customer_id), borrowed_date=VALUES(borrowed_date), return_date=VALUES(return_date);"
+        );
+        $query->bind_param("iiiss", $book_id, $customer_id, $id, $borrowed_date, $return_date);
+        $result = $query->execute();
+        return $result;
+    }
+
     // function updateGame(string $uid, Game $game)
     // {
     //     $data = json_encode($game);

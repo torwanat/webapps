@@ -19,6 +19,10 @@ const Table = () => {
     }, []);
 
     useEffect(() => {
+        createBorrowedTable();
+    }, [borrowed]);
+
+    const createBorrowedTable = () => {
         const tmp: Array<JSX.Element> = borrowed.map((borrowInstance: IBorrowInstance) => {
             return (
                 <tr key={borrowInstance.id}>
@@ -33,7 +37,7 @@ const Table = () => {
             )
         });
         setBorrowedTable(tmp);
-    }, [borrowed]);
+    }
 
     const getBorrowedBooks = async () => {
         const response: Response = await fetch("http://localhost/bookstore/read.php", {
@@ -65,7 +69,7 @@ const Table = () => {
     const handleEdit = (borrowInstance: IBorrowInstance) => {
         const tmp: Array<JSX.Element> = borrowed.map((e: IBorrowInstance) => {
             if (e.id == borrowInstance.id) {
-                return <EditRow {...borrowInstance} key={borrowInstance.id} />;
+                return <EditRow {...borrowInstance} handleCloseEdit={handleCloseEdit} key={borrowInstance.id} />;
             } else {
                 return (
                     <tr key={e.id}>
@@ -80,9 +84,12 @@ const Table = () => {
                 );
             }
         });
-        console.log(tmp);
 
         setBorrowedTable(tmp);
+    }
+
+    const handleCloseEdit = () => {
+        getBorrowedBooks();
     }
 
     return (
