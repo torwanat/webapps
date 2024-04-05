@@ -41,6 +41,38 @@ class Config
         return $result;
     }
 
+    function getBooks()
+    {
+        $response = $this->connection->query(
+            "SELECT id, title FROM `books` WHERE available>0;"
+        );
+        $result = array();
+
+        if ($response->num_rows > 0) {
+            while ($row = $response->fetch_assoc()) {
+                array_push($result, $row);
+            }
+        }
+
+        return $result;
+    }
+
+    function getCustomers()
+    {
+        $response = $this->connection->query(
+            "SELECT id, name, surname FROM `customers`;"
+        );
+        $result = array();
+
+        if ($response->num_rows > 0) {
+            while ($row = $response->fetch_assoc()) {
+                array_push($result, $row);
+            }
+        }
+
+        return $result;
+    }
+
     // function updateGame(string $uid, Game $game)
     // {
     //     $data = json_encode($game);
