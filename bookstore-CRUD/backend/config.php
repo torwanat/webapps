@@ -73,29 +73,23 @@ class Config
         return $result;
     }
 
-    function updateBorrow(int $book_id, int $customer_id, int $id, string $borrowed_date, string $return_date)
+    function addBorrow(int $book_id, int $customer_id, string $borrowed_date, string $return_date)
     {
         $query = $this->connection->prepare(
-            "INSERT INTO `borrowed` (book_id, customer_id, id, borrowed_date, return_date) VALUES(?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE book_id=VALUES(book_id), customer_id=VALUES(customer_id), borrowed_date=VALUES(borrowed_date), return_date=VALUES(return_date);"
+            "INSERT INTO `borrowed` (book_id, customer_id, borrowed_date, return_date) VALUES(?, ?, ?, ?)"
         );
-        $query->bind_param("iiiss", $book_id, $customer_id, $id, $borrowed_date, $return_date);
+        $query->bind_param("iiss", $book_id, $customer_id, $borrowed_date, $return_date);
         $result = $query->execute();
         return $result;
     }
 
-    // function updateGame(string $uid, Game $game)
-    // {
-    //     $data = json_encode($game);
-    //     $query = $this->connection->prepare("UPDATE games SET data=? WHERE game_id=?;");
-    //     $query->bind_param("ss", $data, $uid);
-    //     $query->execute();
-    // }
-
-    // function addNewGame(Game $game)
-    // {
-    //     $data = json_encode($game);
-    //     $query = $this->connection->prepare("INSERT INTO games (game_id, data) VALUES (?,?);");
-    //     $query->bind_param("ss", $game->uid, $data);
-    //     $query->execute();
-    // }
+    function updateBorrow(int $book_id, int $customer_id, string $borrowed_date, string $return_date, int $id)
+    {
+        $query = $this->connection->prepare(
+            "UPDATE `borrowed` SET book_id=?, customer_id=?, borrowed_date=?, return_date=? WHERE id=?"
+        );
+        $query->bind_param("iissi", $book_id, $customer_id, $borrowed_date, $return_date, $id);
+        $result = $query->execute();
+        return $result;
+    }
 }

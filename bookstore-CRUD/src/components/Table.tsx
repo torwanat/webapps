@@ -13,6 +13,7 @@ export interface IBorrowInstance {
 const Table = () => {
     const [borrowed, setBorrowed] = useState<Array<IBorrowInstance>>([]);
     const [borrowedTable, setBorrowedTable] = useState<Array<JSX.Element>>([]);
+    const [alreadyAdding, setAlreadyAdding] = useState<boolean>(false);
 
     useEffect(() => {
         getBorrowedBooks();
@@ -36,6 +37,8 @@ const Table = () => {
                 </tr>
             )
         });
+
+        setAlreadyAdding(false);
         setBorrowedTable(tmp);
     }
 
@@ -46,7 +49,6 @@ const Table = () => {
             }
         });
         const data = await response.json();
-        console.log(data);
         setBorrowed(data);
     }
 
@@ -85,12 +87,24 @@ const Table = () => {
             }
         });
 
+        setAlreadyAdding(true);
+        setBorrowedTable(tmp);
+    }
+
+    const handleAdd = () => {
+        if (alreadyAdding) return;
+
+        const tmp: Array<JSX.Element> = [...borrowedTable, <EditRow handleCloseEdit={handleCloseEdit} key={-1} name="" surname="" title="" id={-1} borrowed_date="" return_date="" />];
+
+        setAlreadyAdding(true);
         setBorrowedTable(tmp);
     }
 
     const handleCloseEdit = () => {
         getBorrowedBooks();
     }
+
+
 
     return (
         <>
@@ -108,6 +122,12 @@ const Table = () => {
                 <tbody>
                     {borrowedTable}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan={5}></td>
+                        <td colSpan={2}><button onClick={handleAdd} style={{ width: "100%" }}>Add</button></td>
+                    </tr>
+                </tfoot>
             </table>
         </>
     )

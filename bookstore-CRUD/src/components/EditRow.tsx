@@ -51,15 +51,21 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleC
             return <option value={e.id} key={e.id}>{e.name + " " + e.surname}</option>;
         });
 
-        setBookId(data.books.find((e: IBook) => { return e.title == title }).id);
-        setCustomerId(data.customers.find((e: ICustomer) => { return e.name == name && e.surname == surname }).id);
+        setBookId(title == "" ? 1 : data.books.find((e: IBook) => { return e.title == title }).id);
+        setCustomerId((name == "" || surname == "") ? 1 : data.customers.find((e: ICustomer) => { return e.name == name && e.surname == surname }).id);
+        setBorrowedDate(borrowed_date == "" ? getTodaysDate() : borrowed_date);
+        setReturnDate(return_date == "" ? getTodaysDate() : return_date);
         setBooks(bookOptions);
         setCustomers(customerOptions);
-        setBorrowedDate(borrowed_date);
-        setReturnDate(return_date);
+    }
+
+    const getTodaysDate = () => {
+        const date = new Date();
+        return date.toISOString().split("T")[0];
     }
 
     const handleSave = async () => {
+
         const body: IBody = {
             customerId,
             bookId,
@@ -67,6 +73,7 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleC
             borrowedDate,
             returnDate
         }
+
         const response: Response = await fetch("http://localhost/bookstore/update.php", {
             method: "POST",
             body: JSON.stringify(body),
@@ -95,8 +102,8 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleC
                     {books}
                 </select>
             </td>
-            <td><input type="date" defaultValue={borrowed_date} onChange={(event) => { setBorrowedDate(event.target.value) }} /></td>
-            <td><input type="date" defaultValue={return_date} onChange={(event) => { setReturnDate(event.target.value) }} /></td>
+            <td><input type="date" value={borrowedDate} onChange={(event) => { setBorrowedDate(event.target.value) }} /></td>
+            <td><input type="date" value={returnDate} onChange={(event) => { setReturnDate(event.target.value) }} /></td>
             <td><button onClick={handleSave}>Save</button></td>
             <td><button onClick={handleCloseEdit}>Cancel</button></td>
         </tr>

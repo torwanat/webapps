@@ -14,7 +14,13 @@ rewind($tempStream);
 $post_data = json_decode(stream_get_contents($tempStream), true);
 
 $connection = new Config();
-$result = $connection->updateBorrow($post_data['bookId'], $post_data['customerId'], $post_data['id'], $post_data['borrowedDate'], $post_data['returnDate']);
+$result;
+
+if ($post_data['id'] == -1) {
+    $result = $connection->addBorrow($post_data['bookId'], $post_data['customerId'], $post_data['borrowedDate'], $post_data['returnDate']);
+} else {
+    $result = $connection->updateBorrow($post_data['bookId'], $post_data['customerId'], $post_data['borrowedDate'], $post_data['returnDate'], $post_data['id']);
+}
 
 $status = [
     "result" => "FAIL"
