@@ -90,9 +90,13 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleC
         }
     }
 
+    const checkIfDateEligible = (borrowDate: Date, returnDate: Date) => {
+        return borrowDate <= returnDate;
+    }
+
     return (
         <tr>
-            <td colSpan={2}>
+            <td>
                 <select onChange={(event) => { setCustomerId(+event.target.value) }} value={customerId}>
                     {customers}
                 </select>
@@ -102,8 +106,8 @@ const EditRow = ({ name, surname, title, id, borrowed_date, return_date, handleC
                     {books}
                 </select>
             </td>
-            <td><input type="date" value={borrowedDate} onChange={(event) => { setBorrowedDate(event.target.value) }} /></td>
-            <td><input type="date" value={returnDate} onChange={(event) => { setReturnDate(event.target.value) }} /></td>
+            <td><input type="date" value={borrowedDate} onChange={(event) => { if (checkIfDateEligible(new Date(event.target.value), new Date(returnDate))) setBorrowedDate(event.target.value) }} /></td>
+            <td><input type="date" value={returnDate} onChange={(event) => { if (checkIfDateEligible(new Date(borrowedDate), new Date(event.target.value))) setReturnDate(event.target.value) }} /></td>
             <td><button onClick={handleSave}>Save</button></td>
             <td><button onClick={handleCloseEdit}>Cancel</button></td>
         </tr>

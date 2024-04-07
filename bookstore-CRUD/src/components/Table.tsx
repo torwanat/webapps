@@ -27,8 +27,7 @@ const Table = () => {
         const tmp: Array<JSX.Element> = borrowed.map((borrowInstance: IBorrowInstance) => {
             return (
                 <tr key={borrowInstance.id}>
-                    <td>{borrowInstance.name}</td>
-                    <td>{borrowInstance.surname}</td>
+                    <td>{borrowInstance.name + " " + borrowInstance.surname}</td>
                     <td>{borrowInstance.title}</td>
                     <td>{borrowInstance.borrowed_date}</td>
                     <td>{borrowInstance.return_date}</td>
@@ -75,8 +74,7 @@ const Table = () => {
             } else {
                 return (
                     <tr key={e.id}>
-                        <td>{e.name}</td>
-                        <td>{e.surname}</td>
+                        <td>{e.name + " " + e.surname}</td>
                         <td>{e.title}</td>
                         <td>{e.borrowed_date}</td>
                         <td>{e.return_date}</td>
@@ -111,8 +109,7 @@ const Table = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Customer name</th>
-                        <th>Customer surname</th>
+                        <th>Customer</th>
                         <th>Book title</th>
                         <th>Date borrowed</th>
                         <th>Date return</th>
@@ -124,7 +121,7 @@ const Table = () => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan={5}></td>
+                        <td colSpan={4}></td>
                         <td colSpan={2}><button onClick={handleAdd} style={{ width: "100%" }}>Add</button></td>
                     </tr>
                 </tfoot>
