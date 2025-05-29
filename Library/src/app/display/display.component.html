@@ -1,0 +1,21 @@
+<div *ngIf="data !== undefined" style="border: 1px solid black; width: fit-content; padding: 15px; margin: 10px;">
+    <div>
+        <img src="http://atarionline.pl/biblioteka/czasopisma/{{data.urlName}}/{{data.logo}}" alt="">
+    </div>
+    <div>
+        <ul>
+            <li>Nazwa: {{data.name}}</li>
+            <li>Wydawnictwo: {{data.publisher}}</li>
+            <li>Numer: {{data.issue}}</li>
+            <li>Strony: {{data.pages}}</li>
+            <li>Format pliku: {{data.format}}</li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li>Podesłał: {{data.from}}</li>
+            <li>Przetworzenie: {{data.editor}}</li>
+            <li>Skan: {{data.scan}}</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saper</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+    <h1 class="heading">SAPER THE GAME</h1>
+    <form class="starting-values">
+        <label for="width">Szerokość: </label>
+        <input type="text" class="input" id="width" name="width">
+        <label for="height">Wysokość: </label>
+        <input type="text" class="input" id="height" name="height">
+        <label for="mines">Miny: </label>
+        <input type="text" class="input" id="mines" name="mines">
+        <label for="nick">Nazwa gracza: </label>
+        <input type="text" class="input" name="nick" id="nick">
+        <button type="submit">Generuj</button>
+    </form>
+    <div class="warnings"></div>
+    <div class="container">
+        <div class="flags"></div>
+        <div class="timer"></div>
+        <div class="app"></div>
+    </div>
+    <ol class="scores">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+    <script src="src/index.js"></script>
+</body>
+</html>

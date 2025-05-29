@@ -1,0 +1,85 @@
+.moveable-container{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+.remove{
+    background-color: white;
+    color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.background{
+    width: 100px;
+    height: 100px;
+    resize: both;
+    position: absolute;
+    overflow: auto;
+    min-height: 100px;
+    min-width: 100px;
+}
+
+.counter{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    min-width: 100px;
+    height: fit-content;
+    text-align: center;
+}
+
+.edit{
+    background-color: gray;
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    padding: 3px;
+    border-radius: 3px;
+    color: white;
+}
+
+#invisible{
+    display: none;
+}
+
+.tox.tox-tinymce{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.box-content{
+    width: 100%;
+    height: 100%;
+}
+
+.box-content > *{
+    max-width: 100%;
+    word-wrap: break-word;
+    padding: 10px;
+}
+
+.tinymce-button{
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    cursor: pointer !important;
+}
+
+.start-button{
+    width: 100px;
+    height: 50px;
+    background-color: gray;
+    color: white;
+    border: 1px solid lightgray;
+    margin: auto;
+}

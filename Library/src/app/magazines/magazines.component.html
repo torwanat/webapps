@@ -1,0 +1,7 @@
+<h1>Wydania {{displayTitle}} z {{year}}</h1>
+
+<div class="displayed-magazines">
+    <app-display *ngFor="let row of dataArr" [data]="row"></app-display>
+</div>
+
+<app-back></app-back>

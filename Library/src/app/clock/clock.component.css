@@ -1,0 +1,13 @@
+.clock{
+    width: fit-content;
+    text-align: right;
+    margin-left: auto;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.container{
+    width: 100%;
+    height: fit-content;
+}

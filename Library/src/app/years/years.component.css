@@ -1,0 +1,22 @@
+.container{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container > div{
+    margin: 10px;
+}
+
+.year-link{
+    text-decoration: none;
+}
+
+.year-link > *{
+    text-decoration: none;
+    color: azure;
+    background-color: darkgray;
+    padding: 5px;
+    border-radius: 5px;
+}

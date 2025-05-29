@@ -1,0 +1,11 @@
+.library{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.library > *{
+    margin: 3%;
+}

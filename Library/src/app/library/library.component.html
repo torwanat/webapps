@@ -1,0 +1,10 @@
+<div *ngIf="libraryData !== undefined">
+    <h1>Magazyny:</h1>
+    <div class="library">
+        <div *ngFor="let magazine of photosArr">
+            <a routerLink="/lib/{{magazine.title}}">
+                <img src="http://atarionline.pl/biblioteka/czasopisma/img/{{magazine.src}}" alt="">
+            </a>
+        </div>
+    </div>
+</div>

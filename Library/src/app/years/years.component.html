@@ -1,0 +1,16 @@
+<div *ngIf="libraryData !== undefined">
+    <h1>Czasopismo {{displayTitle}}</h1>
+    <div class="container">
+        <div *ngFor="let year of yearsArr">
+            <a routerLink="/lib/{{title}}/{{year}}" class="year-link">
+                <p>{{year}}</p>
+            </a>
+        </div>
+        <div>
+            <a routerLink="/lib/{{title}}/all" class="year-link">
+                <p>Wszystkie</p>
+            </a>
+        </div>
+    </div>
+    <app-back></app-back>
+</div>

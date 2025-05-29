@@ -1,0 +1,82 @@
+.box{
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+}
+
+.app{
+    display: grid;
+    margin: 10px;
+}
+
+.heading{
+    margin: auto;
+    width: fit-content;
+    background-color: lightgray;
+    border-radius: 10%;
+    padding: 5%;
+}
+
+.starting-values{
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    margin: auto;
+    padding: 1%;
+    background-color: lightgray;
+    margin-top: 20px;
+    border-radius: 10%;
+}
+
+.container-style{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: fit-content;
+    margin-top: 30px;
+    background-color: lightgrey;
+    padding: 3%;
+    border-radius: 10%;
+}
+
+.warnings-style{
+    margin: auto;
+    width: fit-content;
+    background-color: red;
+    padding: 1%;
+    border-radius: 10%;
+    color: white;
+    margin-top: 10px;
+}
+
+.scores{
+    margin: auto;
+    width: max-content;
+    margin-top: 20px;
+    background-color: lightgray;
+    padding: 2%;
+    border-radius: 10%;
+    min-width: 150px;
+}
+
+.scores > li:first-child{
+    background-color: gold;
+    padding: 5px;
+    border-radius: 10%;
+}
+
+.scores > li:nth-child(2){
+    background-color: silver;
+    padding: 5px;
+    border-radius: 10%;
+}
+
+.scores > li:nth-child(3){
+    background-color: #cd7f32;
+    padding: 5px;
+    border-radius: 10%;
+}
+
+.scores > li{
+    margin: 3px;
+}

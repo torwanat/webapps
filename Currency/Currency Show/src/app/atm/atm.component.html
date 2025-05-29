@@ -1,0 +1,11 @@
+<div *ngIf="+value !== 666.666; else elsePassword">
+    <div class="input-div">
+        <div>Wprowadź swoje zarobki:</div>
+        <input [(ngModel)]="value" (keypress)="($event.charCode >= 48 && $event.charCode < 58) || checkDots($event)" type="password" style="margin: 0 5px;">
+        <div>&#8364;</div>
+    </div>
+    <p *ngIf="+value">I tak widzę, że zarabiasz {{value | currency:'EUR':'symbol':'.0-3'}}</p>
+</div>
+<ng-template #elsePassword>
+    <div>Gratulacje!</div>
+</ng-template>
