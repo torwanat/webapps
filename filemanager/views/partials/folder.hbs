@@ -1,0 +1,10 @@
+<div class="folder-field">
+    <a href="/directory?name={{this}}&path={{@root.directory}}">
+        <p class="folder-name">Folder o nazwie: {{this}}</p>
+    </a>
+    <div class="delete-form" onsubmit="if(!confirm('Czy usunąć?'))event.preventDefault()">
+        <form action="/delete" method="post">
+            <button type="submit" name="deleteName" value="{{this}}" class="delete-button">X</button>
+        </form>
+    </div>
+</div>

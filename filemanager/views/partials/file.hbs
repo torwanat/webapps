@@ -1,0 +1,10 @@
+<div class="file-field">
+    <a href="/file?name={{this}}">
+        <p class="file-name">Plik o nazwie: {{this}}</p>
+    </a>
+    <div class="delete-form">
+        <form action="/delete" method="post" onsubmit="if(!confirm('Czy usunąć?'))event.preventDefault()">
+            <button type="submit" name="deleteName" value="{{this}}" class="delete-button">X</button>
+        </form>
+    </div>
+</div>

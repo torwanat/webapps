@@ -1,0 +1,66 @@
+<div>
+    <div class="controls-container">
+        <button id="btnNewDir" class="universal-button">Nowy folder</button>
+        <button id="btnNewFile" class="universal-button">Nowy plik</button>
+        <button id="btnRenameFolder" class="universal-button">Zmień nazwę folderu</button>
+        <form action="/uploadFile" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="directory" value="{{directory}}">
+            <input type="file" name="uploadFile" id="uploadFile" multiple required>
+            <button type="submit" class="universal-button">Prześlij plik</button>
+        </form>
+    </div>
+
+    <div class="path">
+        <span class="path-folder-name"><a href="/directory?name=&path=">Home </a></span>
+        <span class="path-folder">&gt;</span>
+        {{#each pathDirs}}
+        <span class="path-folder-name"><a href="/directory?name=&path={{this}}">{{pathHelper this}}
+            </a></span>
+        <span class="path-folder">&gt;</span>
+        {{/each}}
+    </div>
+
+    <div class="main-container">
+
+        {{#each dirName}}
+        {{> folder }}
+        {{/each}}
+
+        {{#each fileName}}
+        {{> file}}
+        {{/each}}
+    </div>
+
+    <dialog id="dlNewDir" class="dialog-container">
+        <form action="/createDirectory" method="POST">
+            <input type="hidden" name="directory" value="{{directory}}">
+            <input type="text" required onfocus="this.value=''" name="dirName" id="dirName">
+            <div class="dialog-buttons-container">
+                <button id="confirmBtn" class="universal-button">Submit</button>
+                <button value="cancel" formmethod="dialog" formnovalidate class="universal-button">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="dlNewFile" class="dialog-container">
+        <form action="/createFile" method="POST">
+            <input type="hidden" name="directory" value="{{directory}}">
+            <input type="text" required onfocus="this.value=''" name="fileName" id="fileName">
+            <div class="dialog-buttons-container">
+                <button id="confirmBtn" class="universal-button">Submit</button>
+                <button value="cancel" formmethod="dialog" formnovalidate class="universal-button">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="dlRenameFolder" class="dialog-container">
+        <form action="/rename" method="POST">
+            <input type="hidden" name="directory" value="{{directory}}">
+            <input type="hidden" name="type" value="directory">
+            <input type="text" required onfocus="this.value=''" name="newName" id="newName">
+            <div class="dialog-buttons-container">
+                <button id="confirmBtn" class="universal-button">Submit</button>
+                <button value="cancel" formmethod="dialog" formnovalidate class="universal-button">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+</div>
+</div>

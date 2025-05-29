@@ -1,0 +1,230 @@
+* {
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    background-color: lightcyan;
+}
+
+.main-title {
+    font-size: 72px;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    background: #000046;
+    background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+    background: linear-gradient(to right, #1CB5E0, #000046);
+}
+
+.dialog-buttons-container {
+    margin: 15px;
+    margin-bottom: 5px;
+}
+
+.dialog-buttons-container>* {
+    margin: auto;
+}
+
+.folder-field {
+    width: 120px;
+    height: 120px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    background: #9D50BB;
+    background: -webkit-linear-gradient(to right, #6E48AA, #9D50BB);
+    background: linear-gradient(to right, #6E48AA, #9D50BB);
+}
+
+.file-field {
+    width: 120px;
+    height: 120px;
+    background: #56CCF2;
+    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+    background: linear-gradient(to right, #2F80ED, #56CCF2);
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 3px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.delete-form {
+    width: 100%;
+}
+
+.delete-button {
+    float: right;
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 2px;
+    align-items: center;
+    padding: 10px;
+}
+
+.image-display {
+    width: 200px;
+    height: 200px;
+}
+
+.image-filter-display {
+    width: 100px;
+    height: 100px;
+}
+
+.image-filter-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #56CCF2;
+    margin: 10px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.image-filter-name {
+    color: white;
+}
+
+.image-main-container {
+    display: flex;
+}
+
+.image-controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-controls,
+.image-filters,
+.image-main {
+    margin: 3%;
+}
+
+.image-filters {
+    width: 0px;
+    transition: width 1s;
+    text-align: center;
+}
+
+.image-filters>a {
+    width: 100%;
+    display: block;
+}
+
+#previewImageBtn {
+    margin: auto;
+}
+
+.universal-button {
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 5px;
+    align-items: center;
+}
+
+.universal-button:hover {
+    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+}
+
+@media (min-width: 768px) {
+    .universal-button {
+        padding: 1rem 2rem;
+    }
+}
+
+.controls-container {
+    display: flex;
+}
+
+.dialog-container {
+    border: 1px solid lightblue;
+    border-radius: 15px;
+    background-color: lightcyan;
+}
+
+.file-name,
+.folder-name {
+    color: white;
+    padding-left: 2px;
+}
+
+.path-folder-name {
+    background-color: #2F80ED;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 5px;
+}
+
+.path-folder-name>a {
+    color: white;
+}
+
+.path-folder {
+    color: lightgray;
+}
+
+.image-main {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-path {
+    color: white;
+    background-color: #2F80ED;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.image-filters-title {
+    color: white;
+    background-color: #2F80ED;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: min-content;
+}

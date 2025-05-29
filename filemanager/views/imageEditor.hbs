@@ -1,0 +1,37 @@
+<div class="image-main-container">
+    <div class="image-controls">
+        <button id="imageFiltersBtn" class="universal-button">Filtry</button>
+        <button id="changeImageNameBtn" class="universal-button">Zmiana nazwy pliku</button>
+        <button id="saveImageBtn" class="universal-button">Zapisz zmiany</button>
+        <a href="/preview?name={{image_path}}" target="_blank">
+            <button id="previewImageBtn" class="universal-button">Podgląd</button>
+        </a>
+    </div>
+    <div class="image-filters" id="image-filters">
+        <div class="image-filters-title">Filtry</div>
+        {{#each filters}}
+        <div class="image-filter-container">
+            <img style="filter: {{this}}(100%)" onclick="setMainImage('{{this}}')" src="{{@root.image_path}}"
+                class="image-filter-display" />
+            <p class="image-filter-name">
+                {{this}}
+            </p>
+        </div>
+        {{/each}}
+    </div>
+    <div class="image-main">
+        <div class="image-path">{{image_path}}</div>
+        <img class="image-display" id="image-display" src="{{image_path}}" />
+    </div>
+    <dialog id="dlRenameFile" class="dialog-container">
+        <form action="/rename" method="POST">
+            <input type="hidden" name="directory" value="{{image_path}}">
+            <input type="hidden" name="type" value="file">
+            <input type="text" required onfocus="this.value=''" name="newName" id="newName">
+            <div class="dialog-buttons-container">
+                <button id="confirmBtn" class="universal-button">Submit</button>
+                <button value="cancel" formmethod="dialog" formnovalidate class="universal-button">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+</div>
